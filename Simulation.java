@@ -134,7 +134,7 @@ public class Simulation {
             System.out.println();
         }
 
-        System.out.printf("%-10s | %-10s | %-10s | %-10s%n", "Species", "Knowledge", "Alive", "Avg EP");
+        System.out.printf("%-10s | %-10s | %-10s%n", "Species", "Knowledge", "Avg EP");
         System.out.println("------------------------------------------------");
 
         for (Species s : participants) {
@@ -151,8 +151,8 @@ public class Simulation {
 
             double avgEnergy = aliveCount > 0 ? (double) totalEnergy / aliveCount : 0.0;
 
-            System.out.printf(s.getColorCode() + "%-10s\u001B[0m | %-10d | %-10d | %-10.1f%n",
-                    s.name(), msgCount, aliveCount, avgEnergy);
+            System.out.printf(s.getColorCode() + "%-10s\u001B[0m | %-10d | %-10.1f%n",
+                    s.name(), msgCount, avgEnergy);
         }
     }
 
