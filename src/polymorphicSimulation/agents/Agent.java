@@ -134,13 +134,39 @@ public class Agent extends LivingBeing {
         }
     }
 
+    private enum RPS {
+        ROCK, PAPER, SCISSORS
+    }
+
     private void fight(LivingBeing other) {
-        boolean iWin = MonteCarloRNG.chance(0.5);
-        if (iWin) {
-            stealMessage(other, this);
-        } else {
-            stealMessage(this, other);
+        String reset = "\u001B[0m";
+        boolean winnerFound = false;
+        LivingBeing winner = null;
+        LivingBeing loser = null;
+
+        while (!winnerFound) {
+            RPS myChoice = MonteCarloRNG.getItem(RPS.values());
+            RPS otherChoice = MonteCarloRNG.getItem(RPS.values());
+
+            System.out.println("  > FIGHT: " + this + " chose " + myChoice + " vs " + other + " chose " + otherChoice);
+
+            if (myChoice == otherChoice) {
+                System.out.println("  > It's a TIE! Re-throwing...");
+            } else if ((myChoice == RPS.ROCK && otherChoice == RPS.SCISSORS) ||
+                    (myChoice == RPS.PAPER && otherChoice == RPS.ROCK) ||
+                    (myChoice == RPS.SCISSORS && otherChoice == RPS.PAPER)) {
+                winner = this;
+                loser = other;
+                winnerFound = true;
+            } else {
+                winner = other;
+                loser = this;
+                winnerFound = true;
+            }
         }
+
+        System.out.println("  > Winner: " + winner.getSpecies().getColorCode() + winner + reset);
+        stealMessage(loser, winner);
     }
 
     private void stealMessage(LivingBeing loser, LivingBeing winner) {

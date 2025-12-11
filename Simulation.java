@@ -13,7 +13,7 @@ public class Simulation {
     private final int width = 14;
     private final int height = 8;
     private final int AGENTS_PER_SPECIES = 4;
-    private final int MAX_STEPS = 20;
+    private final int MAX_STEPS = 60;
     private int step = 0;
     private List<Species> participants;
 
@@ -31,16 +31,16 @@ public class Simulation {
         for (Species s : participants) {
             switch (s) {
                 case BOWSER:
-                    placeMaster(SingletonMasterFactory.getMaster(s, 1, 1));
+                    placeMaster(SingletonMasterFactory.getMaster(s, 0, 0));
                     break;
                 case KING_BOO:
-                    placeMaster(SingletonMasterFactory.getMaster(s, width - 2, 1));
+                    placeMaster(SingletonMasterFactory.getMaster(s, width - 1, 0));
                     break;
                 case LUIGI:
-                    placeMaster(SingletonMasterFactory.getMaster(s, 1, height - 2));
+                    placeMaster(SingletonMasterFactory.getMaster(s, 0, height - 1));
                     break;
                 case MARIO:
-                    placeMaster(SingletonMasterFactory.getMaster(s, width - 2, height - 2));
+                    placeMaster(SingletonMasterFactory.getMaster(s, width - 1, height - 1));
                     break;
             }
 
@@ -102,7 +102,7 @@ public class Simulation {
             step++;
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
