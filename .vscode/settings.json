@@ -3,11 +3,5 @@
         "src",
         "."
     ],
-    "java.project.outputPath": "bin",
-    "code-runner.executorMap": {
-        "java": "mkdir -p bin && javac -d bin Main.java Simulation.java $(find src -name \"*.java\") && java -cp bin Main"
-    },
-    "code-runner.clearPreviousOutput": true,
-    "code-runner.ignoreSelection": true,
-    "code-runner.saveFileBeforeRun": true
+    "java.project.outputPath": "out"
 }
