@@ -17,6 +17,67 @@ public class Agent extends LivingBeing {
         this.lastDirection = MonteCarloRNG.getItem(Direction.VALUES);
     }
 
+    private void moveKing(Map map) {
+        moveSingleStep(map, MonteCarloRNG.getItem(Direction.VALUES));
+    }
+
+    private void moveRook(Map map) {
+        Direction[] dirs = { Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST };
+        moveMultiStep(map, MonteCarloRNG.getItem(dirs));
+    }
+
+    private void moveBishop(Map map) {
+        Direction[] dirs = { Direction.NORTHEAST, Direction.NORTHWEST, Direction.SOUTHEAST, Direction.SOUTHWEST };
+        moveMultiStep(map, MonteCarloRNG.getItem(dirs));
+    }
+
+    private void moveQueen(Map map) {
+        moveMultiStep(map, MonteCarloRNG.getItem(Direction.VALUES));
+    }
+
+    private void moveMultiStep(Map map, Direction d) {
+        int steps = MonteCarloRNG.getInt(1, 3);
+        for (int i = 0; i < steps; i++) {
+            if (!attemptMove(map, d)) {
+                break; // Stop if blocked
+            }
+        }
+    }
+
+    private void moveSingleStep(Map map, Direction d) {
+        attemptMove(map, d);
+    }
+
+    private boolean attemptMove(Map map, Direction d) {
+        int targetX = x + d.dx;
+        int targetY = y + d.dy;
+
+        // Hit a wall or enemy safe zone?
+        if (!map.isValid(targetX, targetY) || map.isRestrictedSafeZone(targetX, targetY, this.species)) {
+            consumeEnergy(map);
+            lastDirection = d;
+            return false;
+        }
+
+        Object target = map.getEntityAt(targetX, targetY);
+
+        if (target == null) {
+            map.moveAgent(this, targetX, targetY);
+            consumeEnergy(map);
+            lastDirection = d;
+            return true;
+        } else if (target instanceof Obstacle) {
+            consumeEnergy(map);
+            lastDirection = d;
+            return false;
+        } else if (target instanceof LivingBeing) {
+            interact((LivingBeing) target);
+            consumeEnergy(map);
+            return false;
+        }
+        return false;
+    }
+
     public int getEnergy() {
         return energyPoints;
     }
@@ -33,46 +94,45 @@ public class Agent extends LivingBeing {
         if (map.isInSafeZone(this)) {
             energyPoints = Math.min(maxEnergy, energyPoints + 5);
         } else {
-            int targetX = x;
-            int targetY = y;
-            Direction moveDir = null;
-
             double epRatio = (double) energyPoints / maxEnergy;
 
             // Explore freely unless energy is critical (< 20%)
             if (epRatio >= 0.20) {
-                moveDir = MonteCarloRNG.getItem(Direction.VALUES);
+                switch (species.getMovementType()) {
+                    case KING:
+                        moveKing(map);
+                        break;
+                    case ROOK:
+                        moveRook(map);
+                        break;
+                    case BISHOP:
+                        moveBishop(map);
+                        break;
+                    case QUEEN:
+                        moveQueen(map);
+                        break;
+                }
             } else {
-                moveDir = map.getDirectionToSafeZone(this);
-            }
-
-            targetX += moveDir.dx;
-            targetY += moveDir.dy;
-
-            // Hit a wall or enemy safe zone? Stay put, burn energy.
-            if (!map.isValid(targetX, targetY) || map.isRestrictedSafeZone(targetX, targetY, this.species)) {
-                consumeEnergy(map);
-                lastDirection = moveDir;
-                return;
-            }
-
-            Object target = map.getEntityAt(targetX, targetY);
-
-            if (target == null) {
-                map.moveAgent(this, targetX, targetY);
-                consumeEnergy(map);
-                lastDirection = moveDir;
-            } else if (target instanceof Obstacle) {
-                consumeEnergy(map);
-                lastDirection = moveDir;
-            } else if (target instanceof LivingBeing) {
-                interact((LivingBeing) target);
-                consumeEnergy(map);
+                Direction moveDir = map.getDirectionToSafeZone(this);
+                moveSingleStep(map, moveDir);
             }
         }
 
         // Always check if Master is nearby to offload data
         scanForMaster(map);
+
+        // Check for death (EP <= 0)
+        if (energyPoints <= 0) {
+            die(map);
+        }
+    }
+
+    private void die(Map map) {
+        // "becomes an obstacle and therefore loses all his messages"
+        this.knowledge.clear();
+        map.removeAgent(this);
+        System.out.println(this.species.getColorCode() + this.toString() + " ran out of energy and became an Obstacle!"
+                + src.polymorphicSimulation.style.ColorInConsole.RESET);
     }
 
     private void scanForMaster(Map map) {
