@@ -1,6 +1,6 @@
-package src.polymorphicSimulation.utils;
+package polymorphicSimulation.utils;
 
-import src.polymorphicSimulation.agents.*;
+import polymorphicSimulation.agents.*;
 
 public class SingletonMasterFactory {
 

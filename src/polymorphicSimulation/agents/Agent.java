@@ -1,9 +1,9 @@
-package src.polymorphicSimulation.agents;
+package polymorphicSimulation.agents;
 
-import src.polymorphicSimulation.utils.MonteCarloRNG;
-import src.polymorphicSimulation.utils.Direction;
-import src.polymorphicSimulation.environment.Map;
-import src.polymorphicSimulation.environment.Obstacle;
+import polymorphicSimulation.utils.MonteCarloRNG;
+import polymorphicSimulation.utils.Direction;
+import polymorphicSimulation.environment.Map;
+import polymorphicSimulation.environment.Obstacle;
 
 public class Agent extends LivingBeing {
     protected int energyPoints;
@@ -132,7 +132,7 @@ public class Agent extends LivingBeing {
         this.knowledge.clear();
         map.removeAgent(this);
         System.out.println(this.species.getColorCode() + this.toString() + " ran out of energy and became an Obstacle!"
-                + src.polymorphicSimulation.style.ColorInConsole.RESET);
+                + polymorphicSimulation.style.ColorInConsole.RESET);
     }
 
     private void scanForMaster(Map map) {
@@ -160,7 +160,7 @@ public class Agent extends LivingBeing {
     }
 
     protected void interact(LivingBeing other) {
-        String reset = src.polymorphicSimulation.style.ColorInConsole.RESET;
+        String reset = polymorphicSimulation.style.ColorInConsole.RESET;
         System.out.println(this.species.getColorCode() + this + reset + " interacts with "
                 + other.getSpecies().getColorCode() + other + reset);
 
@@ -199,7 +199,7 @@ public class Agent extends LivingBeing {
     }
 
     private void fight(LivingBeing other) {
-        String reset = src.polymorphicSimulation.style.ColorInConsole.RESET;
+        String reset = polymorphicSimulation.style.ColorInConsole.RESET;
         boolean winnerFound = false;
         LivingBeing winner = null;
         LivingBeing loser = null;
@@ -243,7 +243,7 @@ public class Agent extends LivingBeing {
             if (stolen != null) {
                 winner.addMessage(stolen);
                 loser.getKnowledge().remove(stolen);
-                String reset = src.polymorphicSimulation.style.ColorInConsole.RESET;
+                String reset = polymorphicSimulation.style.ColorInConsole.RESET;
                 System.out.println(winner.getSpecies().getColorCode() + winner + reset + " stole " + stolen + " from "
                         + loser.getSpecies().getColorCode() + loser + reset);
             }

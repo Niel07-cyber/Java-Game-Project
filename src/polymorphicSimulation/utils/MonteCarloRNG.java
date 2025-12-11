@@ -1,4 +1,4 @@
-package src.polymorphicSimulation.utils;
+package polymorphicSimulation.utils;
 
 import java.util.Random;
 

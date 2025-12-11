@@ -1,4 +1,4 @@
-package src.polymorphicSimulation.agents;
+package polymorphicSimulation.agents;
 
 public class Mario extends Agent {
     public static int count = 0;

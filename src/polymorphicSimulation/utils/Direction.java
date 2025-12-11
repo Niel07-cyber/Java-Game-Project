@@ -1,4 +1,4 @@
-package src.polymorphicSimulation.utils;
+package polymorphicSimulation.utils;
 
 public enum Direction {
     NORTH(0, -1),

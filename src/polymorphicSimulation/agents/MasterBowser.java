@@ -1,4 +1,4 @@
-package src.polymorphicSimulation.agents;
+package polymorphicSimulation.agents;
 
 public class MasterBowser extends Master {
     private static MasterBowser instance;

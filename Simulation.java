@@ -1,8 +1,8 @@
-import src.polymorphicSimulation.agents.*;
-import src.polymorphicSimulation.agents.Message;
-import src.polymorphicSimulation.utils.MonteCarloRNG;
-import src.polymorphicSimulation.utils.SingletonMasterFactory;
-import src.polymorphicSimulation.environment.Map;
+import polymorphicSimulation.agents.*;
+import polymorphicSimulation.agents.Message;
+import polymorphicSimulation.utils.MonteCarloRNG;
+import polymorphicSimulation.utils.SingletonMasterFactory;
+import polymorphicSimulation.environment.Map;
 
 import java.util.ArrayList;
 import java.util.Collections;

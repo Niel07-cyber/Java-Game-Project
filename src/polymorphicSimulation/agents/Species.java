@@ -1,6 +1,6 @@
-package src.polymorphicSimulation.agents;
+package polymorphicSimulation.agents;
 
-import src.polymorphicSimulation.style.ColorInConsole;
+import polymorphicSimulation.style.ColorInConsole;
 
 public enum Species {
     BOWSER(Alliance.EVIL, "B", "MB", ColorInConsole.YELLOW, MovementType.KING),

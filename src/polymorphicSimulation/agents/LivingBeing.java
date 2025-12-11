@@ -1,4 +1,4 @@
-package src.polymorphicSimulation.agents;
+package polymorphicSimulation.agents;
 
 import java.util.HashSet;
 import java.util.Set;

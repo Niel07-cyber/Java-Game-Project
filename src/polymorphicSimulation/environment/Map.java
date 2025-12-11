@@ -1,10 +1,10 @@
-package src.polymorphicSimulation.environment;
+package polymorphicSimulation.environment;
 
-import src.polymorphicSimulation.agents.LivingBeing;
-import src.polymorphicSimulation.agents.Species;
-import src.polymorphicSimulation.utils.MonteCarloRNG;
-import src.polymorphicSimulation.utils.Direction;
-import src.polymorphicSimulation.style.ColorInConsole;
+import polymorphicSimulation.agents.LivingBeing;
+import polymorphicSimulation.agents.Species;
+import polymorphicSimulation.utils.MonteCarloRNG;
+import polymorphicSimulation.utils.Direction;
+import polymorphicSimulation.style.ColorInConsole;
 import java.util.ArrayList;
 import java.util.List;
 

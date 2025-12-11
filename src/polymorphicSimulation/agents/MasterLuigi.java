@@ -1,4 +1,4 @@
-package src.polymorphicSimulation.agents;
+package polymorphicSimulation.agents;
 
 public class MasterLuigi extends Master {
     private static MasterLuigi instance;
