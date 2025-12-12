@@ -1,7 +1,6 @@
 package polymorphicSimulation.style;
 
 public class ColorInConsole {
-    // Set this to false if your terminal doesn't support ANSI colors
     private static final boolean COLORS_ENABLED = true;
 
     public static final String RESET = COLORS_ENABLED ? "\u001B[0m" : "";

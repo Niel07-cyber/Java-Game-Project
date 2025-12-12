@@ -67,7 +67,7 @@ public class Simulation {
         int maxEp = 120;
         int x, y;
 
-        // Find a valid starting spot (not a wall, not enemy safe zone)
+        // Find a valid starting spot
         do {
             x = MonteCarloRNG.getInt(0, width - 1);
             y = MonteCarloRNG.getInt(0, height - 1);
@@ -89,10 +89,6 @@ public class Simulation {
             System.out.println("\n--- Step " + step + " ---");
             map.display();
 
-            /*
-             * The order of manipulation of individuals is calculated randomly
-             * at each step.
-             */
             List<LivingBeing> turnOrder = new ArrayList<>(map.getAgents());
             Collections.shuffle(turnOrder);
 
