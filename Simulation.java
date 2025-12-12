@@ -85,14 +85,19 @@ public class Simulation {
         initialize();
 
         while (step < MAX_STEPS) {
+            // Displays the maximum amount of information per step of simulation.
             System.out.println("\n--- Step " + step + " ---");
             map.display();
 
-            // Shuffle order so no species has a turn advantage
+            /*
+             * The order of manipulation of individuals is calculated randomly
+             * at each step.
+             */
             List<LivingBeing> turnOrder = new ArrayList<>(map.getAgents());
             Collections.shuffle(turnOrder);
 
             for (LivingBeing agent : turnOrder) {
+                // During a time step, each individual tries to move.
                 if (map.getAgents().contains(agent) && agent instanceof Agent) {
                     ((Agent) agent).move(map);
                 }

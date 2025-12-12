@@ -128,7 +128,7 @@ public class Agent extends LivingBeing {
     }
 
     private void die(Map map) {
-        // "becomes an obstacle and therefore loses all his messages"
+        // becomes an obstacle and therefore loses all his messages
         this.knowledge.clear();
         map.removeAgent(this);
         System.out.println(this.species.getColorCode() + this.toString() + " ran out of energy and became an Obstacle!"
@@ -145,7 +145,7 @@ public class Agent extends LivingBeing {
                     Master master = (Master) obj;
                     if (master.getSpecies() == this.species) {
                         shareKnowledge(master);
-                        // Download Master's knowledge too (union)
+                        // Download Master's knowledge
                         master.getKnowledge().forEach(this::addMessage);
                     }
                 }

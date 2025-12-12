@@ -3,6 +3,10 @@ package polymorphicSimulation.utils;
 import java.util.Random;
 
 public class MonteCarloRNG {
+    /*
+     * This specific class generates pseudo-random numbers for all
+     * the needs in the code.
+     */
     private static final Random RANDOM = new Random();
 
     public static int getInt(int min, int max) {
