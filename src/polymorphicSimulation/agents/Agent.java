@@ -128,7 +128,7 @@ public class Agent extends LivingBeing {
     }
 
     private void die(Map map) {
-        // becomes an obstacle and therefore loses all his messages
+        // "becomes an obstacle and therefore loses all his messages"
         this.knowledge.clear();
         map.removeAgent(this);
         System.out.println(this.species.getColorCode() + this.toString() + " ran out of energy and became an Obstacle!"
@@ -145,7 +145,7 @@ public class Agent extends LivingBeing {
                     Master master = (Master) obj;
                     if (master.getSpecies() == this.species) {
                         shareKnowledge(master);
-                        // Download Master's knowledge
+                        // Download Master's knowledge too (union)
                         master.getKnowledge().forEach(this::addMessage);
                     }
                 }
@@ -160,7 +160,7 @@ public class Agent extends LivingBeing {
     }
 
     protected void interact(LivingBeing other) {
-        String reset = polymorphicSimulation.style.ColorInConsole.RESET;
+        String reset = src.polymorphicSimulation.style.ColorInConsole.RESET;
         System.out.println(this.species.getColorCode() + this + reset + " interacts with "
                 + other.getSpecies().getColorCode() + other + reset);
 
@@ -199,7 +199,7 @@ public class Agent extends LivingBeing {
     }
 
     private void fight(LivingBeing other) {
-        String reset = polymorphicSimulation.style.ColorInConsole.RESET;
+        String reset = src.polymorphicSimulation.style.ColorInConsole.RESET;
         boolean winnerFound = false;
         LivingBeing winner = null;
         LivingBeing loser = null;
@@ -243,7 +243,7 @@ public class Agent extends LivingBeing {
             if (stolen != null) {
                 winner.addMessage(stolen);
                 loser.getKnowledge().remove(stolen);
-                String reset = polymorphicSimulation.style.ColorInConsole.RESET;
+                String reset = src.polymorphicSimulation.style.ColorInConsole.RESET;
                 System.out.println(winner.getSpecies().getColorCode() + winner + reset + " stole " + stolen + " from "
                         + loser.getSpecies().getColorCode() + loser + reset);
             }
