@@ -4,8 +4,8 @@
 This project simulates a Multi-Agent System (MAS) in the Mario universe.
 
 ## How to Run
-To run the simulation smoothly, open your terminal in the root folder of this project (where `Main.java` is located) and copy-paste the following line:
+To run the simulation smoothly, open your terminal in the root folder of this project (parent of `src`) and copy-paste the following line:
 
 ```bash
-javac -d out -sourcepath src Main.java Simulation.java $(find src -name "*.java") && java -cp out Main
+javac -d out -sourcepath src $(find src -name "*.java") && java -cp out Main
 ```
